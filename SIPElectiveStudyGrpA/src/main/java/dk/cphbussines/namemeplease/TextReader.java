@@ -6,6 +6,8 @@
 package dk.cphbussines.namemeplease;
 
 import dk.cphbussines.entity.Student;
+import dk.cphbussines.entity.Subject;
+import dk.cphbussines.entity.Vote;
 import java.io.File;
 import java.io.FileNotFoundException;
 import java.util.ArrayList;
@@ -76,7 +78,8 @@ public class TextReader {
             String[] lineParameters;
             for (String line : lines) {
                 lineParameters = line.split(",");
-                Student newStudent = new Student(lineParameters[0], lineParameters[1], lineParameters[2], lineParameters[3], lineParameters[4]);
+                Vote vote = new  Vote(new Subject(lineParameters[1]), new Subject(lineParameters[2]),new Subject(lineParameters[3]), new Subject(lineParameters[4]));
+                Student newStudent = new Student(lineParameters[0],vote);
                 students.add(newStudent);
             }
         }
