@@ -12,12 +12,17 @@ package dk.cphbussines.entity;
 public class Student {
 
     private String name;
-
     private Vote vote;
+    private String topicA;
+    private String topicB;
+    private CategoryEnum category;
 
     public Student(String name, Vote vote) {
         this.name = name;
         this.vote = vote;
+        this.topicA = null;
+        this.topicB = null;
+        this.category = CategoryEnum.D;
     }
 
     public String getName() {
@@ -28,5 +33,28 @@ public class Student {
         return vote;
     }
 
+    public String getTopicA() {
+        return topicA;
+    }
+
+    public String getTopicB() {
+        return topicB;
+    }
+
+    public void setTopicA(String topicA) {
+        this.topicA = topicA;
+    }
+
+    public void setTopicB(String topicB) {
+        this.topicB = topicB;
+    }
+
+    public CategoryEnum getCategory() {
+        return category;
+    }
+
+    public void setCategory(CategoryEnum category) {
+        this.category = category;
+    }
 
 }

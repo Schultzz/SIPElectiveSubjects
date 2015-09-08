@@ -12,14 +12,25 @@ package dk.cphbussines.entity;
 public class Subject implements SubjectInterface{
     
     private String topic;
-    
+    private String pool;
+       
     public Subject(String topic){
         this.topic = topic;
+        this.pool = null;
     }
 
     @Override
     public String getTopic() {
         return this.topic;
     }
+    
+    public String getPool(){
+        return pool;
+    }
+
+    public void setPool(String pool) {
+        this.pool = pool;
+    }
+    
     
 }

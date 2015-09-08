@@ -21,20 +21,23 @@ import java.util.logging.Logger;
  */
 public class TextReader {
 
-    public static Scanner loadStudentWishesFromFile() {
+    public TextReader() {
+    }
+
+    public static Scanner loadStudentWishesFromFile(String fileName) {
         //Method that creates a scanner object on a given path
         Scanner scan = null;
         try {
-            scan = new Scanner(new File("studentswishes.txt"));
+            scan = new Scanner(new File(fileName));
         } catch (FileNotFoundException ex) {
             Logger.getLogger(TextReader.class.getName()).log(Level.SEVERE, null, ex);
         }
         return scan;
     }
 
-    public static String StringFromFile() {
+    public static String StringFromFile(String fileName) {
         //Method that takes a scanner object and loops over every line and concatinate them into one string, with newlines.
-        Scanner scan = loadStudentWishesFromFile();
+        Scanner scan = loadStudentWishesFromFile(fileName);
         String str = "";
         while (scan.hasNext()) {
             str += scan.nextLine() + "\n";
@@ -55,37 +58,28 @@ public class TextReader {
             if (lineParameters.length != 5) {
                 validate = false;
                 break;
-            } else {
-                for (String lineParameter : lineParameters) {
-                    if (lineParameter.length() == 0) {
-                        validate = false;
-                        break;
-                    }
-                }
-
             }
 
         }
         return validate;
     }
 
-    public static ArrayList<Student> loadListOfStudents() {
+    public static ArrayList<Student> loadListOfStudents(String fileName) {
         //Method that creates a list of students
         ArrayList<Student> students = new ArrayList<>();
-        String str = TextReader.StringFromFile();//Uses the method that returns a complete string with newlines for each studentline.
+        String str = TextReader.StringFromFile(fileName);//Uses the method that returns a complete string with newlines for each studentline.
         if (validateInput(str)) {//Uses the validation method to check that the input is valid.
             String[] lines = str.split("\n");
             String[] lineParameters;
             for (String line : lines) {
                 lineParameters = line.split(",");
-                Vote vote = new  Vote(new Subject(lineParameters[1]), new Subject(lineParameters[2]),new Subject(lineParameters[3]), new Subject(lineParameters[4]));
-                Student newStudent = new Student(lineParameters[0],vote);
+                Vote vote = new Vote(new Subject(lineParameters[1]), new Subject(lineParameters[2]), new Subject(lineParameters[3]), new Subject(lineParameters[4]));
+                Student newStudent = new Student(lineParameters[0], vote);
                 students.add(newStudent);
             }
         }
-    
-        
-    return students;
+
+        return students;
     }
 
 }
