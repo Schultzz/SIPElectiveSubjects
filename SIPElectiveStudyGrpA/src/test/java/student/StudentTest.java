@@ -5,6 +5,7 @@
  */
 package student;
 
+import dk.cphbussines.entity.CategoryEnum;
 import dk.cphbussines.entity.Student;
 import dk.cphbussines.entity.Subject;
 import dk.cphbussines.entity.SubjectInterface;
@@ -19,17 +20,17 @@ public class StudentTest {
 
     @Test
     public void createNewPersonTest() {
-        //Test for getters ???? plz no
+        //Test for getters ???? plz no      
 
         String name = "Lars";
         String testTopic11 = "Android";
         String testTopic12 = "C#";
         String testTopic21 = "Arduino";
         String testTopic22 = "AI";
-        SubjectInterface subject11 = new Subject(testTopic11);
-        SubjectInterface subject12 = new Subject(testTopic12);
-        SubjectInterface subject21 = new Subject(testTopic21);
-        SubjectInterface subject22 = new Subject(testTopic22);
+        Subject subject11 = new Subject(testTopic11);
+        Subject subject12 = new Subject(testTopic12);
+        Subject subject21 = new Subject(testTopic21);
+        Subject subject22 = new Subject(testTopic22);
         Vote vote = new Vote(subject11, subject12, subject21, subject22);
         Student student1 = new Student(name, vote);
         assertThat(student1.getName(), is(name));
@@ -37,6 +38,11 @@ public class StudentTest {
         assertThat(student1.getVote().getFirstPrio().get(1).getTopic(), is(testTopic12));
         assertThat(student1.getVote().getSecondPrio().get(0).getTopic(), is(testTopic21));
         assertThat(student1.getVote().getSecondPrio().get(1).getTopic(), is(testTopic22));
+
+        assertThat(student1.getTopicA(), is(nullValue()));
+        assertThat(student1.getTopicB(), is(nullValue()));
+
+        assertThat(student1.getCategory(), is(CategoryEnum.D));
 
     }
 
@@ -47,6 +53,35 @@ public class StudentTest {
         Student student = new Student(name, vote);
         assertThat(student.getVote(), is(vote));
 
+    }
+
+    @Test
+    public void assignTopicToStudent() {
+        String topicA = "Node";
+        String topicB = "Java";
+        String name = "Kurt";
+
+        Student student1 = new Student(name, null);
+
+        student1.setTopicA(topicA);
+        student1.setTopicB(topicB);
+
+        assertThat(student1.getTopicA(), is(topicA));
+        assertThat(student1.getTopicB(), is(topicB));
+
+    }
+
+    @Test
+    public void assignCategoryToStudent() {
+
+        String name = "Kurt";
+
+        Student student = new Student(name, null);
+
+        student.setCategory(CategoryEnum.A);
+        
+        assertThat(student.getCategory(), is(CategoryEnum.A));
+        
     }
 
 }
