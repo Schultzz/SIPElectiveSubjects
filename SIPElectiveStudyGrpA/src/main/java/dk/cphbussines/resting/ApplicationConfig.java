@@ -3,7 +3,7 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package dk.cphbussunes.rest;
+package dk.cphbussines.resting;
 
 import java.util.Set;
 import javax.ws.rs.core.Application;
@@ -29,7 +29,7 @@ public class ApplicationConfig extends Application {
      * If required, comment out calling this method in getClasses().
      */
     private void addRestResourceClasses(Set<Class<?>> resources) {
-        resources.add(dk.cphbussunes.rest.Rest.class);
+        resources.add(dk.cphbussines.resting.GenericResource.class);
     }
     
 }
