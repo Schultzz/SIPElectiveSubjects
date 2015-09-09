@@ -51,6 +51,17 @@ public class GenericResource {
         subjects.add(new Subject("Android"));
         subjects.add(new Subject("C#"));
         subjects.add(new Subject("COBOL"));
+        subjects.add(new Subject("C++"));
+        subjects.add(new Subject("Angular"));
+        subjects.add(new Subject("NodeJS"));
+        subjects.add(new Subject("Haskell"));
+        subjects.add(new Subject("Java"));
+        subjects.add(new Subject("Python"));
+        subjects.add(new Subject("Android"));
+        subjects.add(new Subject("Ruby"));
+        subjects.add(new Subject(".NET"));
+        subjects.add(new Subject("ALGOL60"));
+            
         return gson.toJson(subjects);
     }
 
