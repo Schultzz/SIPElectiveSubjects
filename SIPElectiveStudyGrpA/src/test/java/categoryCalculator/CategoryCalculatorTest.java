@@ -89,7 +89,7 @@ public class CategoryCalculatorTest {
         Vote vote1 = new Vote(subject4, subject1, subject3, subject2);
         Vote vote2 = new Vote(subject1, subject3, subject4, subject2);
         Vote vote3 = new Vote(subject1, subject3, subject2, subject6);
-        
+
         Student studentA = new Student("Per", vote);
         Student studentB = new Student("Per1", vote1);
         Student studentC = new Student("Per2", vote2);
@@ -110,18 +110,54 @@ public class CategoryCalculatorTest {
 
         CategoryCalculator calc = new CategoryCalculator(studentList, subjectList);
 
-        calc.assignTopicsToStudents();       
-        
+        calc.assignTopicsToStudents();
+
         assertThat(studentA.getCategory(), is(CategoryEnum.A));
         assertThat(studentB.getCategory(), is(CategoryEnum.B));
         assertThat(studentC.getCategory(), is(CategoryEnum.C));
         assertThat(studentD.getCategory(), is(CategoryEnum.D));
-        
-        
-        
-        
-        
-
     }
 
+    @Test
+    public void IncrementSubjectsWithVoteList() {
+
+        Subject subject1 = new Subject("Android");
+        Subject subject2 = new Subject("C#");
+        Subject subject3 = new Subject("Algol60");
+        Subject subject4 = new Subject("COBOL");
+        Subject subject5 = new Subject("Haskel");
+        Subject subject6 = new Subject("PHP");
+
+        Vote vote = new Vote(subject2, subject4, subject3, subject5);
+        Vote vote1 = new Vote(subject4, subject1, subject3, subject2);
+        Vote vote2 = new Vote(subject1, subject3, subject4, subject2);
+        Vote vote3 = new Vote(subject1, subject3, subject2, subject6);
+
+        Student studentA = new Student("Per", vote);
+        Student studentB = new Student("Per1", vote1);
+        Student studentC = new Student("Per2", vote2);
+        Student studentD = new Student("Per3", vote3);
+        ArrayList<Subject> subjectList = new ArrayList();
+        Subject subjectForList1 = new Subject("C#");
+        subjectForList1.setPool("A");
+        Subject subjectForList2 = new Subject("COBOL");
+        subjectForList2.setPool("B");
+        subjectList.add(subjectForList1);
+        subjectList.add(subjectForList2);
+
+        ArrayList<Student> studentList = new ArrayList();
+        studentList.add(studentA);
+        studentList.add(studentB);
+        studentList.add(studentC);
+        studentList.add(studentD);
+
+        CategoryCalculator ca = new CategoryCalculator(studentList, subjectList);
+
+        ca.calculateSubjectTotal();
+
+        assertThat(ca.getSubjectList().get(0).getPriority1(), is(1));
+        assertThat(ca.getSubjectList().get(0).getPriority2(), is(3));
+        assertThat(ca.getSubjectList().get(1).getPriority1(), is(2));
+        assertThat(ca.getSubjectList().get(1).getPriority2(), is(1));
+    }
 }

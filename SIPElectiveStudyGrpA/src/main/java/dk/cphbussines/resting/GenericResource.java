@@ -10,6 +10,7 @@ import com.google.gson.reflect.TypeToken;
 import dk.cphbussines.calculator.CategoryCalculator;
 import dk.cphbussines.entity.Student;
 import dk.cphbussines.entity.Subject;
+import dk.cphbussines.entity.Vote;
 import dk.cphbussines.namemeplease.TextReader;
 import java.lang.reflect.Type;
 import java.util.ArrayList;
@@ -53,22 +54,48 @@ public class GenericResource {
     @Produces("application/json")
     public String getSubjectsForPoolSelection() {
         //Hardcoded array
-        ArrayList<Subject> subjects = new ArrayList();
-        subjects.add(new Subject("Android"));
-        subjects.add(new Subject("C#"));
-        subjects.add(new Subject("COBOL"));
-        subjects.add(new Subject("C++"));
-        subjects.add(new Subject("Angular"));
-//        subjects.add(new Subject("NodeJS"));
-//        subjects.add(new Subject("Haskell"));
-//        subjects.add(new Subject("Java"));
-//        subjects.add(new Subject("Python"));
-//        subjects.add(new Subject("Arduino"));
-//        subjects.add(new Subject("Ruby"));
-//        subjects.add(new Subject(".NET"));
-//        subjects.add(new Subject("ALGOL60"));
+       
 
-        return gson.toJson(subjects);
+        String testTopic11 = "Android";
+        String testTopic12 = "C#";
+        String testTopic21 = "COBOL";
+        String testTopic22 = "C++";
+        String testTopic31 = "Angular";
+        String testTopic32 = "NodeJS";
+        Subject subject11 = new Subject(testTopic11);
+        Subject subject12 = new Subject(testTopic12);
+        Subject subject21 = new Subject(testTopic21);
+        Subject subject22 = new Subject(testTopic22);
+        Subject subject31 = new Subject(testTopic31);
+        Subject subject32 = new Subject(testTopic32);
+        
+         ArrayList<Subject> subjects = new ArrayList();
+        subjects.add(subject11);
+        subjects.add(subject12);
+        subjects.add(subject21);
+        subjects.add(subject22);
+        subjects.add(subject31);
+        subjects.add(subject32);
+        
+        Vote vote = new Vote(subject11, subject12, subject21, subject22);
+        Vote vote2 = new Vote(subject21, subject31, subject11, subject22);
+        Vote vote3 = new Vote(subject31, subject32, subject11, subject12);
+        Vote vote4 = new Vote(subject21, subject22, subject11, subject22);
+        
+        ArrayList<Student> students = new ArrayList();
+        Student student1 = new Student("Lars", vote);
+        Student student2 = new Student("Peter", vote2);
+        Student student3 = new Student("Arne", vote3);
+        Student student4 = new Student("Jens", vote4);
+
+        students.add(student1);
+        students.add(student2);
+        students.add(student3);
+        students.add(student4);
+        
+        CategoryCalculator calc = new CategoryCalculator(students, subjects);
+        calc.calculateSubjectTotal();
+        return gson.toJson(calc.getSubjectList());
     }
 
     @POST
@@ -81,7 +108,7 @@ public class GenericResource {
         pathStr += "/students.txt";
         
         System.out.println("body: " + body);
-        
+
         Type type = new TypeToken<List<Subject>>() {
         }.getType();
         ArrayList<Subject> subjects = gson.fromJson(body, type);

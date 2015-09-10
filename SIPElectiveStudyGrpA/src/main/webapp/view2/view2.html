@@ -23,7 +23,7 @@
                                 dnd-selected="models.selected = item"
                                 ng-class="{'selected': models.selected === item}"
                                 >
-                                <p>{{item.label}}<span style="margin-left: 1%;" class="badge pull-right">{{'50' | uppercase}}</span><span class="badge pull-right">{{'10' | uppercase}}</span></p>
+                                <p>{{item.label}}<span style="margin-left: 1%;" class="badge pull-right">{{item.priority1}}</span><span class="badge pull-right">{{item.priority2}}</span></p>
                             </li>
                         </ul>
                     </div>

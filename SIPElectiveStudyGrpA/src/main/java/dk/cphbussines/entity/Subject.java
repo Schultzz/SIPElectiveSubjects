@@ -13,6 +13,8 @@ public class Subject implements SubjectInterface{
     
     private String topic;
     private String pool;
+    private int priority1;
+    private int priority2;
        
     public Subject(String topic){
         this.topic = topic;
@@ -22,6 +24,8 @@ public class Subject implements SubjectInterface{
     public Subject(String topic, String pool) {
         this.topic = topic;
         this.pool = pool;
+        this.priority1 = 0;
+        this.priority2 = 0;
     }
     
     @Override
@@ -35,6 +39,22 @@ public class Subject implements SubjectInterface{
 
     public void setPool(String pool) {
         this.pool = pool;
+    }
+
+    public int getPriority1() {
+        return priority1;
+    }
+
+    public int getPriority2() {
+        return priority2;
+    }
+    
+    public void priority1Increment(){
+        priority1++;
+    }
+    
+    public void priority2Increment(){
+        priority2++;
     }
     
     

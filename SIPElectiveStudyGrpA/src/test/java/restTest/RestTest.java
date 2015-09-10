@@ -41,7 +41,6 @@ public class RestTest {
 //        assertThat(subjects.get(0).getTopic(),is("Android"));
 //        assertThat(subjects.get(1).getTopic(),is("C#"));
 //        assertThat(subjects.get(2).getTopic(),is("COBOL"));
-        
     }
 
   
