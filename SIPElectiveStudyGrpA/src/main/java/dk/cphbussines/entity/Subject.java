@@ -19,6 +19,11 @@ public class Subject implements SubjectInterface{
         this.pool = null;
     }
 
+    public Subject(String topic, String pool) {
+        this.topic = topic;
+        this.pool = pool;
+    }
+    
     @Override
     public String getTopic() {
         return this.topic;

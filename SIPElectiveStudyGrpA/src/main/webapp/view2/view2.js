@@ -2,79 +2,148 @@
 
 angular.module('myApp.view2', ['ngRoute'])
 
-    .config(['$routeProvider', function ($routeProvider) {
-        $routeProvider.when('/view2', {
-            templateUrl: 'view2/view2.html',
-            controller: 'View2Ctrl'
-        });
-    }])
+        .config(['$routeProvider', function ($routeProvider) {
+                $routeProvider.when('/view2', {
+                    templateUrl: 'view2/view2.html',
+                    controller: 'View2Ctrl'
+                });
+            }])
 
-    .controller('View2Ctrl', ['$scope', 'subjectsFactory', function ($scope, subjectsFactory) {
+        .filter('color', function () {
+            return function (input) {
 
-
-        //--------- Drag and drop logic
-
-        $scope.models = {
-            selected: null,
-            lists: {"A": [], "Poll": [], "B": []}
-        };
-
-        // TODO: move this to the HTTP request, instead of "dummy" data.
-        for (var i = 1; i <= 5; ++i) {
-            //$scope.models.lists.A.push({label: "Item A" + i});
-            //$scope.models.lists.B.push({label: "Item B" + i});
-            $scope.models.lists.Poll.push({label: "Item B" + i, name: "test " + i});
-        }
-
-        subjectsFactory.getData().
-            success(function(data, status, headers, config) {
-                // this callback will be called asynchronously
-                // when the response is available
-            }).
-            error(function(data, status, headers, config) {
-                // called asynchronously if an error occurs
-                // or server returns response with an error status.
-
-            });
+                input += " test"
 
 
-        // Can be removed, to test if the list were filled up.
-        $scope.test = function () {
-            console.log("A: " + $scope.models.lists.A.length);
-            console.log("Poll: " + $scope.models.lists.Poll.length);
-            console.log("B: " + $scope.models.lists.B.length);
-        };
+                return input;
+            };
+        })
 
-        // Called when a subject is moved,
-        // TODO: Calculate logic here!!
-        $scope.moved = function () {
-            console.log("MOVED!");
-        };
+        .controller('View2Ctrl', ['$scope', 'subjectsFactory', function ($scope, subjectsFactory) {
 
-        //--------- END. Drag and drop logic
+                // For sorting the Category
+
+                $scope.sortType = 'category'; // set the default sort type
+                $scope.sortReverse = true;  // set the default sort order
+                $scope.searchFish = '';     // set the default search/filter term
+
+                //--------- Calculate
+
+                $scope.calculate = function () {
+
+                    var payload = [];
+
+                    $scope.models.lists.A.forEach(function (entry) {
+                        var obj = {topic: entry.label, pool: "A"};
+                        payload.push(obj);
+                    });
+
+                    $scope.models.lists.B.forEach(function (entry) {
+                        var obj = {topic: entry.label, pool: "B"};
+                        payload.push(obj);
+                    });
+
+                    console.log("payload " + payload.length);
+
+                    subjectsFactory.calculateCategory(payload).
+                            success(function (data, status, headers, config) {
+                                $scope.calculateData = data;
+                                $scope.countCategoryScore();
+                            }).
+                            error(function (data, status, headers, config) {
+                                console.log("err: ", data);
+                            });
 
 
-        //--------- HTTP request to get subjects
-
-        subjectsFactory.getData().success(function (data) {
-            $scope.subjets = data;
-        }).error(function (data) {
-            $scope.subjetsError = data;
-        });
-
-        //--------- END. HTTP request to get subjects
-
-    }])
-    .factory('subjectsFactory', ['$http', function ($http) {
-
-        var dataFactory = {};
+                };
 
 
-        dataFactory.getData = function () {
-            return $http.get("/api/getAllSubjects");
-        };
-        return dataFactory;
+                //--------- END. Calculate
 
-    }]);
+
+                //CountCategoryScore
+                $scope.countCategoryScore = function () {
+
+                    $scope.aCounter = 0;
+                    $scope.bCounter = 0;
+                    $scope.cCounter = 0;
+                    $scope.dCounter = 0;
+
+
+                    $scope.calculateData.forEach(function (data) {
+
+
+                        if (data.category === "A") {
+                            $scope.aCounter++;
+                        }
+                        else if (data.category === "B") {
+                            $scope.bCounter++;
+                        }
+                        else if (data.category === "C") {
+                            $scope.cCounter++;
+                        }
+                        else {
+                            $scope.dCounter++;
+                        }
+
+                    })
+
+
+                }
+
+                //--------- Drag and drop logic
+                $scope.showError = false;
+
+                $scope.models = {
+                    selected: null,
+                    lists: {"A": [], "Poll": [], "B": []}
+                };
+
+                // Calls the API, and gets a list of subjects.
+                subjectsFactory.getSubjects().
+                        success(function (data, status, headers, config) {
+                            data.forEach(function (entry) {
+                                $scope.models.lists.Poll.push({label: entry.topic});
+                            })
+                        }).
+                        error(function (data, status, headers, config) {
+                            $scope.subjetsError = data;
+                            $scope.showError = true;
+                        });
+
+
+                // TODO: Can be removed, to test if the list were filled up.
+                $scope.test = function () {
+                    console.log("A: " + $scope.models.lists.A.length);
+                    console.log("Poll: " + $scope.models.lists.Poll.length);
+                    console.log("B: " + $scope.models.lists.B.length);
+                };
+
+                // Called when a subject is moved,
+                // TODO: Calculate logic here!!
+                $scope.moved = function () {
+                    $scope.calculate();
+                };
+
+                //--------- END. Drag and drop logic
+
+
+            }])
+        .factory('subjectsFactory', ['$http', function ($http) {
+
+                var dataFactory = {};
+
+
+                dataFactory.getSubjects = function () {
+                    return $http.get("http://localhost:8080/SIPElectiveStudyGrpA/api/subject");
+                };
+
+                dataFactory.calculateCategory = function (payload) {
+                    return $http.post("http://localhost:8080/SIPElectiveStudyGrpA/api/subject/studentCalc", payload);
+                };
+
+                return dataFactory;
+
+            }]);
 
 

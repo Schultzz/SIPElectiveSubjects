@@ -28,6 +28,17 @@ public class SubjectTest {
     }
     
     @Test
+    public void testCreateNewSubjectWithPool(){
+        
+        String topic = "Android";
+        String pool = "A";
+        Subject subject = new Subject(topic, pool);
+        assertThat(subject.getTopic(), is(topic));
+        assertThat(subject.getPool(), is(pool));
+        
+    }
+    
+    @Test
     public void setPool(){
         
         Subject subject = new Subject(null);
