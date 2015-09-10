@@ -21,6 +21,8 @@ import java.util.logging.Logger;
  */
 public class TextReader {
 
+    private File root = new File(getClass().getResource("/").getPath() + "students.txt");
+    
     public TextReader() {
     }
 
@@ -28,6 +30,9 @@ public class TextReader {
         //Method that creates a scanner object on a given path
         Scanner scan = null;
         try {
+//            scan = new Scanner(new File(fileName));
+            
+            //System.out.println(new File(TextReader.class.getResource("/").getPath() + fileName).toString());
             scan = new Scanner(new File(fileName));
         } catch (FileNotFoundException ex) {
             Logger.getLogger(TextReader.class.getName()).log(Level.SEVERE, null, ex);
@@ -48,11 +53,10 @@ public class TextReader {
 
     public static Boolean validateInput(String str) {
         //Method that validates a given string, to ensure that the string contains the right input.
-        String[] lines = str.split("\n");
+        String[] lines = str.split(";");
         Boolean validate = true;
         String[] lineParameters;
         for (String line : lines) {
-
             lineParameters = line.split(",");
 
             if (lineParameters.length != 5) {
@@ -69,7 +73,7 @@ public class TextReader {
         ArrayList<Student> students = new ArrayList<>();
         String str = TextReader.StringFromFile(fileName);//Uses the method that returns a complete string with newlines for each studentline.
         if (validateInput(str)) {//Uses the validation method to check that the input is valid.
-            String[] lines = str.split("\n");
+            String[] lines = str.split(";");
             String[] lineParameters;
             for (String line : lines) {
                 lineParameters = line.split(",");
@@ -78,7 +82,7 @@ public class TextReader {
                 students.add(newStudent);
             }
         }
-
+        System.out.println(students.size());
         return students;
     }
 

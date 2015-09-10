@@ -1,0 +1,10 @@
+Knud,Angular,ALGOL60,C#,JavaScript;
+Karl,C++,NodeJS,C#,Java;
+Sven,Haskell,ALGOL60,C++,.NET;
+Peter,C#,C++,Android,Angular;
+Nikolai,Python,C++,.NET,JavaScript;
+Johantan,.NET,ALGOL60,C++,Python;
+Stefan,Android,ALGOL60,C#,JavaScript;
+Isak,NodeJS,Android,C#,JavaScript;
+Kurt,Angular,ALGOL60,C#,JavaScript;
+Josef,Angular,ALGOL60,C#,JavaScript
