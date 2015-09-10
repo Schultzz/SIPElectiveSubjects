@@ -23,7 +23,7 @@
                                 dnd-selected="models.selected = item"
                                 ng-class="{'selected': models.selected === item}"
                                 >
-                                <p>{{item.label}}<span class="badge pull-right">{{'aa' | uppercase}}</span></p>
+                                <p>{{item.label}}<span style="margin-left: 1%;" class="badge pull-right">{{'50' | uppercase}}</span><span class="badge pull-right">{{'10' | uppercase}}</span></p>
                             </li>
                         </ul>
                     </div>
@@ -103,24 +103,24 @@
                                     </tr>
                                 </thead>
                                 <tbody>
-                                    <tr ng-repeat="student in calculateData | orderBy:sortType:sortReverse">
+                                    <tr ng-repeat="student in calculateData | orderBy:sortType:sortReverse" ng-class="rowColor(student.category)">
                                         <th>{{student.name}}</th>
                                         <th>{{student.category}}</th>
-                                        <th>{{student.vote.firstPrio[0].topic}}</th>
-                                        <th>{{student.vote.firstPrio[1].topic}}</th>
-                                        <th>{{student.vote.secondPrio[0].topic}}</th>
-                                        <th>{{student.vote.secondPrio[1].topic}}</th>
+                                        <th>{{studentVotes(student.vote.firstPrio[0].topic, student)}}</th>
+                                        <th>{{studentVotes(student.vote.firstPrio[1].topic, student)}}</th>
+                                        <th>{{studentVotes(student.vote.secondPrio[0].topic, student)}}</th>
+                                        <th>{{studentVotes(student.vote.secondPrio[1].topic, student)}}</th>
                                     </tr>
                                 </tbody>
                             </table>
                         </div>
                         <!-- /.table-responsive -->
-                        <div class="well">
+                        <div class="well text-center">
                             <!--<h4>DataTables Usage Information</h4>-->
 
                             <!--<p>Some text here...-->
                             <!--</p>-->
-                            <a class="btn btn-default btn-lg btn-block" target="_blank" href="">Generate list</a>
+                            <a class="btn btn-primary btn-lg" target="_blank" href="">Generate list</a>
                         </div>
                     </div>
 

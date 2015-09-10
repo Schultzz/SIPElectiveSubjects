@@ -9,15 +9,16 @@ angular.module('myApp.view2', ['ngRoute'])
                 });
             }])
 
-        .filter('color', function () {
+        .filter('selected', function () {
             return function (input) {
 
-                input += " test"
+                input += '\u2713';
 
 
                 return input;
             };
         })
+        
 
         .controller('View2Ctrl', ['$scope', 'subjectsFactory', function ($scope, subjectsFactory) {
 
@@ -59,7 +60,7 @@ angular.module('myApp.view2', ['ngRoute'])
 
 
                 //--------- END. Calculate
-
+                
 
                 //CountCategoryScore
                 $scope.countCategoryScore = function () {
@@ -90,6 +91,45 @@ angular.module('myApp.view2', ['ngRoute'])
 
 
                 }
+                
+                //CATEGORYCOUNT END
+                
+                //Checkmark function
+                
+                $scope.studentVotes = function(subject, student){
+                    
+                    if(student.topicA === subject){
+                        subject += '\u2713';
+                    }
+                    else if(student.topicB === subject){
+                        subject += '\u2713';
+                    }
+                    return subject;
+                    
+                }
+                
+                //ROW COLORS START
+                
+                $scope.rowColor = function(category){
+                    
+                    if(category === "A"){
+                        return "success";
+                    }
+                    else if(category === "B"){
+                        return "info";
+                    }
+                    else if(category === "C"){
+                        return "warning";
+                    }
+                    else{
+                        return "danger";
+                    }
+                    
+                    
+                }
+                
+                //ROW COLORS END
+                
 
                 //--------- Drag and drop logic
                 $scope.showError = false;
