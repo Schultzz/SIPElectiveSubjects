@@ -143,7 +143,7 @@ angular.module('myApp.view2', ['ngRoute'])
                 subjectsFactory.getSubjects().
                         success(function (data, status, headers, config) {
                             data.forEach(function (entry) {
-                                $scope.models.lists.Poll.push({label: entry.topic});
+                                $scope.models.lists.Poll.push({label: entry.topic, priority1: entry.priority1, priority2: entry.priority2});
                             })
                         }).
                         error(function (data, status, headers, config) {
