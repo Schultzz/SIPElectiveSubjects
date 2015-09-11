@@ -76,24 +76,32 @@ public class GenericResource {
         subjects.add(subject22);
         subjects.add(subject31);
         subjects.add(subject32);
+//        
+//        Vote vote = new Vote(subject11, subject12, subject21, subject22);
+//        Vote vote2 = new Vote(subject21, subject31, subject11, subject22);
+//        Vote vote3 = new Vote(subject31, subject32, subject11, subject12);
+//        Vote vote4 = new Vote(subject21, subject22, subject11, subject22);
+//        
+//        ArrayList<Student> students = new ArrayList();
+//        Student student1 = new Student("Lars", vote);
+//        Student student2 = new Student("Peter", vote2);
+//        Student student3 = new Student("Arne", vote3);
+//        Student student4 = new Student("Jens", vote4);
+//
+//        students.add(student1);
+//        students.add(student2);
+//        students.add(student3);
+//        students.add(student4);
         
-        Vote vote = new Vote(subject11, subject12, subject21, subject22);
-        Vote vote2 = new Vote(subject21, subject31, subject11, subject22);
-        Vote vote3 = new Vote(subject31, subject32, subject11, subject12);
-        Vote vote4 = new Vote(subject21, subject22, subject11, subject22);
         
-        ArrayList<Student> students = new ArrayList();
-        Student student1 = new Student("Lars", vote);
-        Student student2 = new Student("Peter", vote2);
-        Student student3 = new Student("Arne", vote3);
-        Student student4 = new Student("Jens", vote4);
-
-        students.add(student1);
-        students.add(student2);
-        students.add(student3);
-        students.add(student4);
+        
+        String pathStr = context.getRealPath("/WEB-INF/classes");
+        pathStr += "/students.txt";
+        
+        ArrayList<Student> students = TextReader.loadListOfStudents(pathStr);
         
         CategoryCalculator calc = new CategoryCalculator(students, subjects);
+        
         calc.calculateSubjectTotal();
         return gson.toJson(calc.getSubjectList());
     }
