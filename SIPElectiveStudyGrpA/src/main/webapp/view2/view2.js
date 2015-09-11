@@ -44,7 +44,7 @@ angular.module('myApp.view2', ['ngRoute'])
                         payload.push(obj);
                     });
 
-                    console.log("payload " + payload.length);
+                    //console.log("payload " + payload.length);
 
                     subjectsFactory.calculateCategory(payload).
                             success(function (data, status, headers, config) {
@@ -54,6 +54,20 @@ angular.module('myApp.view2', ['ngRoute'])
                             error(function (data, status, headers, config) {
                                 console.log("err: ", data);
                             });
+                            
+                            $scope.genSubjects = function() {
+                                alert("Du trykkede på en knap!");
+//                            subjectsFactory.generateSubjectPools(payload).
+//                            success(function (data, status, headers, config) {
+//                                //$scope.calculateData = data;
+//                                //$scope.countCategoryScore();
+//                                alert("Der skete noget!")
+//                            }).
+//                            error(function (data, status, headers, config) {
+//                                console.log("Generate list button pressed!");
+//                                console.log("err: ", data);
+//                            })
+                            };
 
 
                 };
@@ -181,7 +195,11 @@ angular.module('myApp.view2', ['ngRoute'])
                 dataFactory.calculateCategory = function (payload) {
                     return $http.post("http://localhost:8080/SIPElectiveStudyGrpA/api/subject/studentCalc", payload);
                 };
-
+                
+                dataFactory.generateSubjectPools = function (payload) {
+                    return $http.post("http://localhost:8080/SIPElectiveStudyGrpA/api/subject/CHANGE", payload);
+                }
+                
                 return dataFactory;
 
             }]);

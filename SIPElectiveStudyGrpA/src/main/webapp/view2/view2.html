@@ -23,7 +23,7 @@
                                 dnd-selected="models.selected = item"
                                 ng-class="{'selected': models.selected === item}"
                                 >
-                                <p>{{item.label}}<span style="margin-left: 1%;" class="badge pull-right">{{item.priority1}}</span><span class="badge pull-right">{{item.priority2}}</span></p>
+                                <p>{{item.label}}<span style="margin-left: 1%;" class=" pull-right"><span class="badge">{{item.priority1}}</span> <span class="badge">{{item.priority2}}</span></span></p>
                             </li>
                         </ul>
                     </div>
@@ -120,7 +120,7 @@
 
                             <!--<p>Some text here...-->
                             <!--</p>-->
-                            <a class="btn btn-primary btn-lg" target="_blank" href="">Generate list</a>
+                            <a ng-click="genSubjects()" class="btn btn-primary btn-lg" target="_blank" href="">Generate list</a>
                         </div>
                     </div>
 
