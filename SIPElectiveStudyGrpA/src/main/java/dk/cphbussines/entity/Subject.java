@@ -56,6 +56,11 @@ public class Subject implements SubjectInterface{
     public void priority2Increment(){
         priority2++;
     }
+
+    @Override
+    public String toString() {
+        return topic+","+pool+";";
+    }
     
     
 }

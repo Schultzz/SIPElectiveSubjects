@@ -8,9 +8,13 @@ package dk.cphbussines.namemeplease;
 import dk.cphbussines.entity.Student;
 import dk.cphbussines.entity.Subject;
 import dk.cphbussines.entity.Vote;
+import java.io.BufferedWriter;
 import java.io.File;
 import java.io.FileNotFoundException;
+import java.io.FileWriter;
+import java.io.IOException;
 import java.util.ArrayList;
+import java.util.List;
 import java.util.Scanner;
 import java.util.logging.Level;
 import java.util.logging.Logger;
@@ -22,7 +26,7 @@ import java.util.logging.Logger;
 public class TextReader {
 
     private File root = new File(getClass().getResource("/").getPath() + "students.txt");
-    
+
     public TextReader() {
     }
 
@@ -31,11 +35,11 @@ public class TextReader {
         Scanner scan = null;
         try {
 //            scan = new Scanner(new File(fileName));
-            
+
             //System.out.println(new File(TextReader.class.getResource("/").getPath() + fileName).toString());
             scan = new Scanner(new File(fileName));
         } catch (FileNotFoundException ex) {
-            Logger.getLogger(TextReader.class.getName()).log(Level.SEVERE, null, ex);
+         //   Logger.getLogger(TextReader.class.getName()).log(Level.SEVERE, null, ex);
         }
         return scan;
     }
@@ -86,4 +90,28 @@ public class TextReader {
         return students;
     }
 
+    public static Boolean savePoolsToFile(String filePath, List<Subject> array) {
+        try {
+            File file = new File(filePath);
+            if (!file.exists()) {
+                System.out.println("Filen eksisterer ikke, vi laver den nu");
+                file.createNewFile();
+            }
+            
+            FileWriter fw = new FileWriter(file.getAbsoluteFile());
+            BufferedWriter bw = new BufferedWriter(fw);
+            String result = "";
+            for (Subject subject : array) {
+                result += subject.toString();       
+            }
+            System.out.println(result);
+            System.out.println(file.getPath());
+            bw.write(result);
+            bw.close();          
+        } catch (IOException e) {
+            e.printStackTrace();
+            return false;
+        }
+        return true;
+    }
 }
