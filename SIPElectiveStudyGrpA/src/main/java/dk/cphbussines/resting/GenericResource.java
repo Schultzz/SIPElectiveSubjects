@@ -126,7 +126,7 @@ public class GenericResource {
         
         String pathStr = context.getRealPath("/WEB-INF/classes");
         pathStr += "/pools.txt";
-        
+         
         Subject[] subjectArray = gson.fromJson(body, Subject[].class);
         List<Subject> subjectList = Arrays.asList(subjectArray);
 
@@ -134,6 +134,22 @@ public class GenericResource {
         System.out.println(subjectList.toString());
         
         TextReader.savePoolsToFile(pathStr, subjectList);
-        return data;
+        return pathStr;
     }
+    
+    @GET
+    @Produces("application/json")
+    @Path("/getElectedPools")
+    public String getElectedPools() {
+        
+      String pathStr = context.getRealPath("/WEB-INF/classes");
+        pathStr += "/pools.txt";
+        
+        ArrayList<Subject> subject = TextReader.loadListOfPools(pathStr);
+        
+       
+       
+        return gson.toJson(subject);
+       
+                }
 }

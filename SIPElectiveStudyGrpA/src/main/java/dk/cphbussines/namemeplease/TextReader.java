@@ -30,16 +30,16 @@ public class TextReader {
     public TextReader() {
     }
 
+    // rename den her 
     public static Scanner loadStudentWishesFromFile(String fileName) {
         //Method that creates a scanner object on a given path
         Scanner scan = null;
         try {
 //            scan = new Scanner(new File(fileName));
 
-            //System.out.println(new File(TextReader.class.getResource("/").getPath() + fileName).toString());
             scan = new Scanner(new File(fileName));
         } catch (FileNotFoundException ex) {
-         //   Logger.getLogger(TextReader.class.getName()).log(Level.SEVERE, null, ex);
+            //   Logger.getLogger(TextReader.class.getName()).log(Level.SEVERE, null, ex);
         }
         return scan;
     }
@@ -53,6 +53,16 @@ public class TextReader {
         }
 
         return str;
+    }
+
+    public static String StringFromPools(String fileName) {
+        Scanner scan = loadStudentWishesFromFile(fileName);
+        String str = "";
+       // while (scan.hasNext()) {
+            str += scan.nextLine();
+        //}
+        return str;
+
     }
 
     public static Boolean validateInput(String str) {
@@ -72,6 +82,41 @@ public class TextReader {
         return validate;
     }
 
+    public static Boolean validateInputFromPool(String str) {
+        //Method that validates a given string, to ensure that the string contains the right input.
+        String[] lines = str.split(";");
+        Boolean validate = true;
+        String[] lineParameters;
+        for (String line : lines) {
+            lineParameters = line.split(",");
+            if (lineParameters.length != 2) {
+                validate = false;
+                break;
+            }
+
+        }
+        return validate;
+    }
+    
+    
+     public static ArrayList<Subject> loadListOfPools(String fileName) {
+        //Method that creates a list of students
+        ArrayList<Subject> subject = new ArrayList<>();
+        String str = TextReader.StringFromPools(fileName);//Uses the method that returns a complete string with newlines for each studentline.
+        if (validateInputFromPool(str)) {//Uses the validation method to check that the input is valid.
+            String[] lines = str.split(";");
+            String[] lineParameters;
+            for (String line : lines) {
+                lineParameters = line.split(",");
+                Subject sub = new Subject(lineParameters[0],lineParameters[1]);
+                subject.add(sub);
+            }
+        }
+
+        return subject;
+    }
+    
+
     public static ArrayList<Student> loadListOfStudents(String fileName) {
         //Method that creates a list of students
         ArrayList<Student> students = new ArrayList<>();
@@ -86,7 +131,7 @@ public class TextReader {
                 students.add(newStudent);
             }
         }
-        System.out.println(students.size());
+
         return students;
     }
 
@@ -97,17 +142,16 @@ public class TextReader {
                 System.out.println("Filen eksisterer ikke, vi laver den nu");
                 file.createNewFile();
             }
-            
+
             FileWriter fw = new FileWriter(file.getAbsoluteFile());
             BufferedWriter bw = new BufferedWriter(fw);
             String result = "";
             for (Subject subject : array) {
-                result += subject.toString();       
+                result += subject.toString();
             }
-            System.out.println(result);
-            System.out.println(file.getPath());
-            bw.write(result);
-            bw.close();          
+
+            bw.write(result.substring(0, result.length() - 1));
+            bw.close();
         } catch (IOException e) {
             e.printStackTrace();
             return false;

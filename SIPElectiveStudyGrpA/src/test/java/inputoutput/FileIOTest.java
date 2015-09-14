@@ -92,4 +92,23 @@ public class FileIOTest {
         subjects.add(subject42);
         assertThat(TextReader.savePoolsToFile("pools.txt", subjects), is(true));
     }
+    
+    @Test
+    public void testStringFromPools()
+    {
+    String str = TextReader.StringFromPools("pools.txt");
+    assertThat(str.contains(","), is(true));
+        
+    }
+    
+    
+    @Test
+    public void testValidateInputFromPool() {
+        //Method to test the validation method, to ensure that the given file contains the right format in order to create students.
+        Boolean validate = TextReader.validateInputFromPool(TextReader.StringFromPools("pools.txt"));
+        assertThat(validate, is(true));
+
+       validate = TextReader.validateInputFromPool(TextReader.StringFromPools("poolsWrongFormat.txt"));
+        assertThat(validate, is(false));
+    }
 }
