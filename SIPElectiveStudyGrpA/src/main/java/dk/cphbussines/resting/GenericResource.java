@@ -112,7 +112,7 @@ public class GenericResource {
         ArrayList<Student> students = TextReader.loadListOfStudents(pathStr);
         System.out.println("studentsSize: " + students.size());
         CategoryCalculator calc = new CategoryCalculator(students, subjects);
-        students = calc.assignTopicsToStudents();
+        students = calc.assignTopicsToStudents2();
         String studentGson = gson.toJson(students);
         return studentGson;
 
