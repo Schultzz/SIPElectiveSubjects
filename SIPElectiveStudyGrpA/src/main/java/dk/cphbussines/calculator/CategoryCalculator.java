@@ -34,44 +34,42 @@ public class CategoryCalculator {
     public ArrayList<Subject> getSubjectList() {
         return subjectList;
     }
-    
+
     /*
-    Metode til at udregne det antal elever som har henholdvis prioriteret
-    hvert subject. Både første og anden prioritet bliver gemt i subjectList
-    */
-    public void calculateSubjectTotal(){
-        
+     Metode til at udregne det antal elever som har henholdvis prioriteret
+     hvert subject. Både første og anden prioritet bliver gemt i subjectList
+     */
+    public void calculateSubjectTotal() {
+
         // !!!! Mangler optimering til gennemgangen af subjects !!!!
-        
         for (Student student : studentList) {
-            
+
             SubjectInterface s11 = student.getVote().getFirstPrio().get(0);
             SubjectInterface s12 = student.getVote().getFirstPrio().get(1);
             SubjectInterface s21 = student.getVote().getSecondPrio().get(0);
             SubjectInterface s22 = student.getVote().getSecondPrio().get(1);
-            
+
             for (Subject subject : subjectList) {
-                
+
                 if (subject.getTopic().equals(s11.getTopic())) {
                     subject.priority1Increment();
                 }
-                
+
                 if (subject.getTopic().equals(s12.getTopic())) {
                     subject.priority1Increment();
                 }
-                
+
                 if (subject.getTopic().equals(s21.getTopic())) {
                     subject.priority2Increment();
                 }
-                
+
                 if (subject.getTopic().equals(s22.getTopic())) {
                     subject.priority2Increment();
                 }
-                
+
             }
         }
-        
-        
+
     }
 
     public ArrayList<Student> assignTopicsToStudents() {
@@ -123,13 +121,13 @@ public class CategoryCalculator {
                     poolCounter++;
                 }
                 poolCounter = 0;
-            } else {
+            }
+            if (student.getTopicB() == null) {
                 //else do topic B stuff
                 while (student.getTopicB() == null && poolCounter < subjectList.size()) {
 
                     if (s12.getTopic().equals(subjectList.get(poolCounter).getTopic())) {
                         Subject tempSubject = subjectList.get(poolCounter);
-
                         if (tempSubject.getPool().equals("B")) {
                             student.setTopicB(subjectList.get(poolCounter).getTopic());
                             studentScore += 5;
@@ -212,7 +210,7 @@ public class CategoryCalculator {
                 }
                 //Subject 22 end
             }
-            System.out.println("Student" + student.getName() + " - score " + studentScore);
+//            System.out.println("Student" + student.getName() + " - score " + studentScore);
             // Calculates the studens Category from the studentscore
             if (studentScore == 10) {
                 student.setCategory(CategoryEnum.A);

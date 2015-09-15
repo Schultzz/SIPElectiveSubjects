@@ -176,7 +176,7 @@ function minErr(module, ErrorConstructor) {
  * # ng (core module)
  * The ng module is loaded by default when an AngularJS application is started. The module itself
  * contains the essential components for an AngularJS application to function. The table below
- * lists a high level breakdown of each of the services/factories, filters, directives and testing
+ * subjects a high level breakdown of each of the services/factories, filters, directives and testing
  * components available within this core module.
  *
  * <div doc-module-components="ng"></div>
@@ -22065,7 +22065,7 @@ var CONSTANT_VALUE_REGEXP = /^(true|false|\d+)$/;
  * so that when the element is selected, the {@link ngModel `ngModel`} of that element is set to
  * the bound value.
  *
- * `ngValue` is useful when dynamically generating lists of radio buttons using
+ * `ngValue` is useful when dynamically generating subjects of radio buttons using
  * {@link ngRepeat `ngRepeat`}, as shown below.
  *
  * Likewise, `ngValue` can be used to generate `<option>` elements for
@@ -24227,7 +24227,7 @@ var ngIncludeFillContentDirective = ['$compile',
  * **Note**: If you have assignment in `ngInit` along with {@link ng.$filter `$filter`}, make
  * sure you have parenthesis for correct precedence:
  * <pre class="prettyprint">
- * `<div ng-init="test1 = (data | orderBy:'name')"></div>`
+ * `<div ng-init="prioOneDisabler = (data | orderBy:'name')"></div>`
  * </pre>
  * </div>
  *

@@ -45,7 +45,7 @@ angular.module('dndLists', [])
    *                      variables are event and dropEffect.
    * - dnd-type           Use this attribute if you have different kinds of items in your
    *                      application and you want to limit which items can be dropped into which
-   *                      lists. Combine with dnd-allowed-types on the dnd-list(s). This attribute
+   *                      subjects. Combine with dnd-allowed-types on the dnd-list(s). This attribute
    *                      should evaluate to a string, although this restriction is not enforced.
    * - dnd-disable-if     You can use this attribute to dynamically disable the draggability of the
    *                      element. This is useful if you have certain list items that you don't want
