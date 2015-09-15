@@ -91,6 +91,7 @@ public class FileIOTest {
         subjects.add(subject41);
         subjects.add(subject42);
         assertThat(TextReader.savePoolsToFile("pools.txt", subjects), is(true));
+        assertThat(TextReader.savePoolsToFile("findesIkke.txt", subjects), is(false));
     }
     
     @Test
@@ -110,5 +111,12 @@ public class FileIOTest {
 
        validate = TextReader.validateInputFromPool(TextReader.StringFromPools("poolsWrongFormat.txt"));
         assertThat(validate, is(false));
+    }
+    
+     @Test
+    public void testPoolCreation() {
+        //Method to test that the studentcreation method returns a list with students
+        ArrayList<Subject> sub = TextReader.loadListOfPools("pools.txt");
+        assertThat(sub.size(), is(not(0)));
     }
 }
