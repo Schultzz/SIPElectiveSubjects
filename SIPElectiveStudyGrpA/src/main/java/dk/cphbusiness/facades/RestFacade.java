@@ -55,7 +55,7 @@ public class RestFacade {
         System.out.println("studentsSize: " + students.size());
         
         CategoryCalculator calc = new CategoryCalculator(students, subjects);
-        students = calc.assignTopicsToStudents();
+        students = calc.assignTopicsToStudents2();
 
         return students;
     }
