@@ -153,7 +153,7 @@ public class CategoryCalculatorTest {
 
         CategoryCalculator ca = new CategoryCalculator(studentList, subjectList);
 
-        ca.calculateSubjectTotal();
+        ca.incrementSubjectVotes();
 
         assertThat(ca.getSubjectList().get(0).getPriority1(), is(1));
         assertThat(ca.getSubjectList().get(0).getPriority2(), is(3));
