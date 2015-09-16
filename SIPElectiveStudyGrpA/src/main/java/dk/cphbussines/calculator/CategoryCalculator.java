@@ -39,7 +39,7 @@ public class CategoryCalculator {
     Metode til at udregne det antal elever som har henholdvis prioriteret
     hvert subject. Både første og anden prioritet bliver gemt i subjectList
     */
-    public void calculateSubjectTotal(){
+    public void incrementSubjectVotes(){
         
         // !!!! Mangler optimering til gennemgangen af subjects !!!!
         
@@ -66,12 +66,9 @@ public class CategoryCalculator {
                 
                 if (subject.getTopic().equals(s22.getTopic())) {
                     subject.priority2Increment();
-                }
-                
+                }               
             }
-        }
-        
-        
+        }    
     }
 
     public ArrayList<Student> assignTopicsToStudents() {

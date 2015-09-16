@@ -70,29 +70,29 @@ public class FileIOTest {
         assertThat(students.size(), is(not(0)));
     }
 
-    @Test
-    public void testSaveSubjects() {
-        Subject subject12 = new Subject("C#", "A");
-        Subject subject21 = new Subject("Python", "B");
-        Subject subject22 = new Subject("Android", "A");
-        Subject subject31 = new Subject("SW Design", "B");
-        Subject subject32 = new Subject("Games", "B");
-        Subject subject41 = new Subject("Databases", "A");
-        Subject subject42 = new Subject("Test", "A");
-        Subject subject11 = new Subject("Arduino", "B");
-
-        ArrayList<Subject> subjects = new ArrayList();
-        subjects.add(subject11);
-        subjects.add(subject12);
-        subjects.add(subject21);
-        subjects.add(subject22);
-        subjects.add(subject31);
-        subjects.add(subject32);
-        subjects.add(subject41);
-        subjects.add(subject42);
-        assertThat(TextReader.savePoolsToFile("pools.txt", subjects), is(true));
-        assertThat(TextReader.savePoolsToFile("findesIkke.txt", subjects), is(false));
-    }
+//    @Test
+//    public void testSaveSubjects() {
+//        Subject subject12 = new Subject("C#", "A");
+//        Subject subject21 = new Subject("Python", "B");
+//        Subject subject22 = new Subject("Android", "A");
+//        Subject subject31 = new Subject("SW Design", "B");
+//        Subject subject32 = new Subject("Games", "B");
+//        Subject subject41 = new Subject("Databases", "A");
+//        Subject subject42 = new Subject("Test", "A");
+//        Subject subject11 = new Subject("Arduino", "B");
+//
+//        ArrayList<Subject> subjects = new ArrayList();
+//        subjects.add(subject11);
+//        subjects.add(subject12);
+//        subjects.add(subject21);
+//        subjects.add(subject22);
+//        subjects.add(subject31);
+//        subjects.add(subject32);
+//        subjects.add(subject41);
+//        subjects.add(subject42);
+//        assertThat(TextReader.savePoolsToFile("pools.txt", subjects), is(true));
+//        assertThat(TextReader.savePoolsToFile("findesIkke.txt", subjects), is(false));
+//    }
     
     @Test
     public void testStringFromPools()
