@@ -1,43 +1,110 @@
-<p>This is the partial for view 1.</p>
+<div class="container" id="wrapper" ng-controller="View1Ctrl">
 
-<div  class="container" style="width: 100%">
+    <h3>Make your vote!</h3>
+    <hr/>
 
-    <div class="row">
-
-        <div class="border col-sm-3">
-            <a href="">test</a>
+    <div class="col-md-12 well">
+        <div class="form-group">
+            <label for="nameInput">Name:</label>
+            <input type="text" class="form-control" id="nameInput" ng-model="name" placeholder="Enter name">
         </div>
 
-        <div class="border col-sm-3 col-centered">
-            <a href="">test</a>
+        <br/>
+        <!--Pool A-->
+        <div>
+            <div class="row">
+                <div class="col-md-5">
+                    <div class="panel panel-danger">
+                        <div class="panel-heading">
+                            <h3 class="panel-title">{{models.subjects[2].name}}</h3>
+                        </div>
+                        <div class="panel-body">
+                            <ul class="dragDrop" dnd-list="models.subjects[2].list">
+                                <li ng-repeat="item in models.subjects[2].list"
+                                    dnd-draggable="item"
+                                    dnd-dragstart="prioOneDisabler(item.pool); prioTwoDisabler(item.pool)"
+                                    dnd-moved="models.subjects[2].list.splice($index, 1); "
+                                    dnd-effect-allowed="move"
+                                    dnd-selected="models.selected = item">
+                                    <p>{{item.topic}}</p>
+                                </li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+                <!--first pick-->
+                <div class="col-md-2">
+                    <div class="panel panel-info">
+                        <div class="panel-heading">
+                            <h3 class="panel-title">{{models.subjects[0].name}}</h3>
+                        </div>
+                        <div class="panel-body">
+                            <ul dnd-disable-if="prioOneBoolean"
+                                dnd-list="models.subjects[0].list">
+                                <li ng-repeat="item in models.subjects[0].list"
+                                    dnd-draggable="item"
+                                    dnd-moved="models.subjects[0].list.splice($index, 1)"
+                                    dnd-effect-allowed="move"
+                                    dnd-selected="models.selected = item">
+                                    <p>{{item.topic}}
+                                    </p>
+                                </li>
+                            </ul>
+                        </div>
+                    </div>
+                    <!--second pick-->
+                    <div class="panel panel-info">
+                        <div class="panel-heading">
+                            <h3 class="panel-title">{{models.subjects[1].name}}</h3>
+                        </div>
+                        <div class="panel-body">
+                            <ul dnd-disable-if="prioTwoBoolean"
+                                dnd-list="models.subjects[1].list">
+                                <li ng-repeat="item in models.subjects[1].list"
+                                    dnd-draggable="item"
+                                    dnd-moved="models.subjects[1].list.splice($index, 1)"
+                                    dnd-effect-allowed="move"
+                                    dnd-selected="models.selected = item">
+                                    <p>{{item.topic}}
+                                    </p>
+                                </li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+                <!--Pool B-->
+                <div class="col-md-5">
+                    <div class="panel panel-success">
+                        <div class="panel-heading">
+                            <h3 class="panel-title">{{models.subjects[3].name}}</h3>
+                        </div>
+                        <div class="panel-body">
+                            <ul class="dragDrop" dnd-list="models.subjects[3].list">
+                                <li ng-repeat="item in models.subjects[3].list"
+                                    dnd-draggable="item"
+                                    dnd-dragstart="prioOneDisabler(item.pool); prioTwoDisabler(item.pool)"
+                                    dnd-moved="models.subjects[3].list.splice($index, 1)"
+                                    dnd-effect-allowed="move"
+                                    dnd-selected="models.selected = item">
+                                    <p>{{item.topic}}
+                                    </p>
+                                </li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+            </div>
         </div>
+        <div class="pull-right">
+            <button class="btn btn-success" ng-disabled="validationVote()" ng-click="submitSubjects()">Make your vote
+            </button>
 
-        <div class="border col-sm-3">
-            <a href="">test</a>
         </div>
-
-        <div class="score col-sm-3">
-            <a href=""><b>Score</b></a>
+        <div class="alert alert-success" ng-class="{fade:doFade}" role="alert" ng-show="showSuccess">Vote was send!
         </div>
-
-        <div class="tableScore col-lg-10">
-            <table class="table table-striped">
-                <tr>
-                    <td>Navn</td>
-                </tr>
-                <tr>
-                    <td>TEst</td>
-                </tr>
-            </table>
-        </div>
-
+        <div class="alert alert-danger" ng-class="{fade:doFade}" role="alert" ng-show="showError">{{errorMsg}}</div>
 
     </div>
 
-    <div class="row">
-        <div class="pull-left">
-            <button name="Compile" class="btn btn-success">Compile</button>
-        </div>
-    </div>
 
 </div>

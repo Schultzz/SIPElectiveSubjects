@@ -57,7 +57,16 @@ public class GenericResource {
         }.getType();
 
         ArrayList<Subject> subjects = gson.fromJson(body, type);
+<<<<<<< HEAD
         ArrayList<Student> students = rf.studentCalc(pathStr, body, subjects);
+=======
+        ArrayList<Student> students = TextReader.loadListOfStudents(pathStr);
+        System.out.println("studentsSize: " + students.size());
+        CategoryCalculator calc = new CategoryCalculator(students, subjects);
+        students = calc.assignTopicsToStudents2();
+        String studentGson = gson.toJson(students);
+        return studentGson;
+>>>>>>> 0b914c8406e44cdb91b959733d99f81452839cb9
 
         return gson.toJson(students);
     }

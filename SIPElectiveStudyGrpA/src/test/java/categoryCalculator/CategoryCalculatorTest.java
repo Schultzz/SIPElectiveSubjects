@@ -65,7 +65,7 @@ public class CategoryCalculatorTest {
 
         CategoryCalculator calc = new CategoryCalculator(studentList, subjectList);
 
-        ArrayList<Student> assignedStudents = calc.assignTopicsToStudents();
+        ArrayList<Student> assignedStudents = calc.assignTopicsToStudents2();
         //Topics er strings, burde måske være på subjects, not sure
         assertThat(assignedStudents.isEmpty(), is(not(true)));
         System.out.println(assignedStudents.get(0).getTopicA());
@@ -110,7 +110,7 @@ public class CategoryCalculatorTest {
 
         CategoryCalculator calc = new CategoryCalculator(studentList, subjectList);
 
-        calc.assignTopicsToStudents();
+        calc.assignTopicsToStudents2();
 
         assertThat(studentA.getCategory(), is(CategoryEnum.A));
         assertThat(studentB.getCategory(), is(CategoryEnum.B));

@@ -38,7 +38,7 @@ ul[dnd-list] .dndPlaceholder {
 }
 
 /**
- * The dnd-lists's child elements currently MUST have
+ * The dnd-subjects's child elements currently MUST have
  * position: relative. Otherwise we can not determine
  * whether the mouse pointer is in the upper or lower
  * half of the element we are dragging over. In other
