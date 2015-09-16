@@ -81,16 +81,14 @@ public class GenericResource {
 //        students.add(student2);
 //        students.add(student3);
 //        students.add(student4);
-        
-        
-        
+
         String pathStr = context.getRealPath("/WEB-INF/classes");
-        pathStr += "/students.txt";
-        
+        pathStr += "/students.csv";
+
         ArrayList<Student> students = TextReader.loadListOfStudents(pathStr);
-        
+
         CategoryCalculator calc = new CategoryCalculator(students, subjects);
-        
+
         calc.calculateSubjectTotal();
         return gson.toJson(calc.getSubjectList());
     }
@@ -102,7 +100,7 @@ public class GenericResource {
     public String studentCalc(String body) {
 
         String pathStr = context.getRealPath("/WEB-INF/classes");
-        pathStr += "/students.txt";
+        pathStr += "/students.csv";
 
         System.out.println("body: " + body);
 
@@ -112,7 +110,7 @@ public class GenericResource {
         ArrayList<Student> students = TextReader.loadListOfStudents(pathStr);
         System.out.println("studentsSize: " + students.size());
         CategoryCalculator calc = new CategoryCalculator(students, subjects);
-        students = calc.assignTopicsToStudents2();
+        students = calc.assignTopicsToStudents();
         String studentGson = gson.toJson(students);
         return studentGson;
 
@@ -123,33 +121,30 @@ public class GenericResource {
     @Consumes("application/json")
     @Path("/electedPools")
     public String electedPools(String body) {
-        
+
         String pathStr = context.getRealPath("/WEB-INF/classes");
-        pathStr += "/pools.txt";
-         
+        pathStr += "/pools.csv";
+
         Subject[] subjectArray = gson.fromJson(body, Subject[].class);
         List<Subject> subjectList = Arrays.asList(subjectArray);
 
         String data = gson.toJson(subjectList);
         System.out.println(subjectList.toString());
-        
+
         TextReader.savePoolsToFile(pathStr, subjectList);
         return pathStr;
     }
-    
+
     @GET
     @Produces("application/json")
     @Path("/getElectedPools")
     public String getElectedPools() {
-        
-      String pathStr = context.getRealPath("/WEB-INF/classes");
-        pathStr += "/pools.txt";
-        
+
+        String pathStr = context.getRealPath("/WEB-INF/classes");
+        pathStr += "/pools.csv";
+
         ArrayList<Subject> subject = TextReader.loadListOfPools(pathStr);
-        
-       
-       
         return gson.toJson(subject);
-       
-                }
+       // return pathStr;
+    }
 }

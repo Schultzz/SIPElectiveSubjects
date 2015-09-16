@@ -30,7 +30,7 @@ public class FileIOTest {
     @Test
     public void testFileConnection() {
         //Method to test that a file is loaded corretly, so that a valid scanner object is returned
-        Scanner scan = TextReader.loadStudentWishesFromFile("students.txt");
+        Scanner scan = TextReader.loadStudentWishesFromFile("students.csv");
         assertThat(scan, is(not(nullValue())));
 
         scan = TextReader.loadStudentWishesFromFile("notfound.txt");
@@ -41,7 +41,7 @@ public class FileIOTest {
     @Test
     public void testFileLine() {
         //Method to test that a scanner object has more than one line
-        Scanner scan = TextReader.loadStudentWishesFromFile("students.txt");
+        Scanner scan = TextReader.loadStudentWishesFromFile("students.csv");
         assertThat(scan.hasNext(), is(true));
 
     }
@@ -49,14 +49,14 @@ public class FileIOTest {
     @Test
     public void testStringHasComma() {
         //Method to test that a the returned string contains commas
-        String str = TextReader.StringFromFile("students.txt");
+        String str = TextReader.StringFromFile("students.csv");
         assertThat(str.contains(","), is(true));
     }
 
     @Test
     public void testStringHasValidInput() {
         //Method to test the validation method, to ensure that the given file contains the right format in order to create students.
-        Boolean validate = TextReader.validateInput(TextReader.StringFromFile("students.txt"));
+        Boolean validate = TextReader.validateInput(TextReader.StringFromFile("students.csv"));
         assertThat(validate, is(true));
 
         validate = TextReader.validateInput(TextReader.StringFromFile("studentswishesWrongFormat.txt"));
@@ -66,7 +66,7 @@ public class FileIOTest {
     @Test
     public void testStudentCreation() {
         //Method to test that the studentcreation method returns a list with students
-        ArrayList<Student> students = TextReader.loadListOfStudents("students.txt");
+        ArrayList<Student> students = TextReader.loadListOfStudents("students.csv");
         assertThat(students.size(), is(not(0)));
     }
 
@@ -90,7 +90,7 @@ public class FileIOTest {
         subjects.add(subject32);
         subjects.add(subject41);
         subjects.add(subject42);
-        assertThat(TextReader.savePoolsToFile("pools.txt", subjects), is(true));
+        assertThat(TextReader.savePoolsToFile("pools.csv", subjects), is(true));
 //        Failes need to be fixed!
 //        assertThat(TextReader.savePoolsToFile("findesIkke.txt", subjects), is(false));
     }
@@ -98,7 +98,7 @@ public class FileIOTest {
     @Test
     public void testStringFromPools()
     {
-    String str = TextReader.StringFromPools("pools.txt");
+    String str = TextReader.StringFromPools("pools.csv");
     assertThat(str.contains(","), is(true));
         
     }
@@ -107,7 +107,7 @@ public class FileIOTest {
     @Test
     public void testValidateInputFromPool() {
         //Method to test the validation method, to ensure that the given file contains the right format in order to create students.
-        Boolean validate = TextReader.validateInputFromPool(TextReader.StringFromPools("pools.txt"));
+        Boolean validate = TextReader.validateInputFromPool(TextReader.StringFromPools("pools.csv"));
         assertThat(validate, is(true));
 
        validate = TextReader.validateInputFromPool(TextReader.StringFromPools("poolsWrongFormat.txt"));
@@ -117,7 +117,7 @@ public class FileIOTest {
      @Test
     public void testPoolCreation() {
         //Method to test that the studentcreation method returns a list with students
-        ArrayList<Subject> sub = TextReader.loadListOfPools("pools.txt");
+        ArrayList<Subject> sub = TextReader.loadListOfPools("pools.csv");
         assertThat(sub.size(), is(not(0)));
     }
 }

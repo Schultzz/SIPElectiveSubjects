@@ -56,5 +56,7 @@ public class Student {
     public void setCategory(CategoryEnum category) {
         this.category = category;
     }
+    
+    
 
 }

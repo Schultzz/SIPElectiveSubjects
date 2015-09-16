@@ -103,7 +103,7 @@ public class CategoryCalculator {
 
     }
 
-    public ArrayList<Student> assignTopicsToStudents2() {
+    public ArrayList<Student> assignTopicsToStudents() {
 
         for (Student student : studentList) {
             //For each student in the list do stuff:

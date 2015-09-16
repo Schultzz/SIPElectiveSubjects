@@ -1,2 +1,11 @@
-java,he,hg,he;
-her,her,herhe,h;
+sep=,
+Fag,Pool
+Arduino,B
+C#,A
+Python,B
+Android,A
+SW Design,B
+Games,B
+Databases,A
+Test,A
+gre

@@ -59,7 +59,7 @@ public class Subject implements SubjectInterface{
 
     @Override
     public String toString() {
-        return topic+","+pool+";";
+        return topic+","+pool+"\n";
     }
     
     

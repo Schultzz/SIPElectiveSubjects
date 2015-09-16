@@ -55,12 +55,8 @@ angular.module('myApp.view2', ['ngRoute'])
                     console.log("err: ", data);
                 });
 
-        };
-
-        //--------- END. Calculate
-
-
-        $scope.genSubjects = function () {
+                
+            $scope.genSubjects = function () {
             alert("Du trykkede på en knap!");
             subjectsFactory.generateSubjectPools(payload).
                 success(function (data, status, headers, config) {
@@ -73,7 +69,14 @@ angular.module('myApp.view2', ['ngRoute'])
                     console.log("Generate list button pressed!");
                     console.log("err: ", data);
                 })
+             };
+        
         };
+
+        //--------- END. Calculate
+
+
+        
 
 
         //CountCategoryScore

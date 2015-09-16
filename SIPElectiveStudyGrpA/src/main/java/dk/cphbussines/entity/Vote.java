@@ -33,6 +33,9 @@ public class Vote implements VoteInterface{
     public ArrayList<SubjectInterface> getSecondPrio() {
      return  secondPrio;
     }
+    
+    
+    
 
   
 

@@ -1,4 +1,0 @@
-Bjarke Carlsen,C#,SW Design,Android,Python;
-Martin Olgenkjær,Arduino,SW Design,Databases,Test;
-Henrik Stavnem,Android,Games,C#,Databases;
-Nicklas Thomasen,Python,Arduino,SW Design,Test
