@@ -64,6 +64,12 @@ public class RestFacade {
         path += "/pools.csv";
         TextReader.savePoolsToFile(path, subjectList);
     }
+    
+    public void saveStudentVote(String path, Student stu) {
+        path += "/studentswishes.csv";
+        TextReader textReader = new TextReader();
+        textReader.savingVoteSecondRound(stu,path);
+    }
 
     public ArrayList<Subject> getElectedPools(String path) {
         path += "/pools.csv";

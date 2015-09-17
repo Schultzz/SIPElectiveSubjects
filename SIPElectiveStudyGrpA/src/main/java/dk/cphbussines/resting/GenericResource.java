@@ -5,6 +5,7 @@ import com.google.gson.reflect.TypeToken;
 import dk.cphbusiness.facades.RestFacade;
 import dk.cphbussines.entity.Student;
 import dk.cphbussines.entity.Subject;
+import dk.cphbussines.entity.Vote;
 import java.lang.reflect.Type;
 import java.util.ArrayList;
 import java.util.Arrays;
@@ -16,6 +17,7 @@ import javax.ws.rs.Path;
 import javax.ws.rs.GET;
 import javax.ws.rs.POST;
 import javax.ws.rs.Produces;
+import org.json.JSONObject;
 
 /**
  * REST Web Service
@@ -74,6 +76,23 @@ public class GenericResource {
 
         String data = gson.toJson(subjectList);
         return data;
+    }
+    
+    @POST
+    @Produces("application/json")
+    @Consumes("application/json")
+    @Path("/saveStudentVote")
+    public String saveStudentVote(String body) {
+        String pathStr = context.getRealPath("/WEB-INF/classes");
+        JSONObject jsonObj = new JSONObject(body);
+        
+        String name = jsonObj.getString("name");
+        
+        Vote vote = new Vote(new Subject(jsonObj.getString("prioOnePoolA")), new Subject(jsonObj.getString("prioOnePoolB")), new Subject(jsonObj.getString("prioTwoPoolB")), new Subject(jsonObj.getString("prioTwoPoolA")));
+       
+        Student stu = new Student(name, vote);
+        rf.saveStudentVote(pathStr, stu);
+        return pathStr;
     }
 
     @GET

@@ -99,8 +99,8 @@ angular.module('myApp.view1', ['ngRoute'])
 
             //console.log($scope.models.subjects[0].list);
 
-            // kører gennem de fag som er valgt i første prio
-            // og derefter tilføjer dem til et objekt
+            // kï¿½rer gennem de fag som er valgt i fï¿½rste prio
+            // og derefter tilfï¿½jer dem til et objekt
             arrayPrioOne.list.forEach(function (element) {
                 if (element.pool === 'A') {
                     tempObject.prioOnePoolA = element.topic;
@@ -109,8 +109,8 @@ angular.module('myApp.view1', ['ngRoute'])
                 }
             });
 
-            // kører gennem de fag som er valgt i anden prio
-            // og derefter tilføjer dem til et objekt
+            // kï¿½rer gennem de fag som er valgt i anden prio
+            // og derefter tilfï¿½jer dem til et objekt
             arrayPrioTwo.list.forEach(function (element) {
                 if (element.pool === 'A') {
                     tempObject.prioTwoPoolA = element.topic;
@@ -129,7 +129,7 @@ angular.module('myApp.view1', ['ngRoute'])
                     console.log("success", data);
                 }).
                 error(function (data, status, headers, config) {
-                    $scope.errorMsg = "well fuck";
+                    $scope.errorMsg = "Done";
                     $scope.showError = true;
                     $timeout(function () {
                         $scope.doFade = true;
@@ -154,7 +154,7 @@ angular.module('myApp.view1', ['ngRoute'])
         };
 
         dataFactory.submitVote = function (payload) {
-            return $http.post("http://localhost:8080/SIPElectiveStudyGrpA/api/subject", payload);
+            return $http.post("http://localhost:8080/SIPElectiveStudyGrpA/api/subject/saveStudentVote", payload);
         }
 
 
